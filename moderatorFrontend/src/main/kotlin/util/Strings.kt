@@ -66,6 +66,36 @@ object Strings {
     "Etwas lief schief. Bitte versuchen Sie es nochmal."
   )
 
+  val all_check_ins = LocalizedString(
+    "All check ins",
+    "Alle Check-Ins"
+  )
+
+  val all_check_ins_location = LocalizedString(
+    "Location",
+    "Ort"
+  )
+
+  val all_check_ins_in_date = LocalizedString(
+    "Check in date",
+    "Check In date"
+  )
+
+  val all_check_ins_out_date = LocalizedString(
+    "Check out date",
+    "Check Out date"
+  )
+
+  val all_check_ins_email = LocalizedString(
+    "Email",
+    "E-mail"
+  )
+
+  val all_check_ins_seat = LocalizedString(
+    "Seat",
+    "Sitz"
+  )
+
   val locations = LocalizedString(
     "Locations",
     "Orte"

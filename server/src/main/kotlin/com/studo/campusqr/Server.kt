@@ -123,6 +123,9 @@ suspend fun main() {
           get("getLiveCheckIns") { call.getLiveCheckIns() }
         }
       }
+      route("checkIns") {
+        get("listCheckIns") { call.getAuthenticatedCall()?.listCheckIns() }
+      }
       route("access") {
         get("list") { call.getAuthenticatedCall()?.listAccess() }
         get("export") { call.getAuthenticatedCall()?.listExportAccess() }

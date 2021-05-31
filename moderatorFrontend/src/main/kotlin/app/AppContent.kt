@@ -13,6 +13,7 @@ import views.accessManagement.accessManagementOverview.renderAccessManagementLis
 import views.adminInfo.renderAdminInfo
 import views.common.pathNotFoundView
 import views.guestCheckIn.guestCheckInOverview.renderGuestCheckInOverview
+import views.allCheckIns.renderAllCheckIns
 import views.locations.locationsOverview.renderListLocations
 import views.login.LoginMode
 import views.login.renderLoginView
@@ -47,6 +48,7 @@ class AppContent : RComponent<AppContentProps, AppContentState>() {
       Url.ACCESS_MANAGEMENT_LOCATION_LIST_EXPORT -> renderAccessManagementExportList(locationId = currentAppRoute.pathParams["id"])
       Url.GUEST_CHECK_IN -> renderGuestCheckInOverview()
       Url.LOCATIONS_LIST -> renderListLocations(userData = props.config.userData!!)
+      Url.ALL_CHECK_INS -> renderAllCheckIns(userData = props.config.userData!!)
       Url.REPORT -> renderReport()
       Url.USERS -> renderUsers(userData = props.config.userData!!)
       Url.ACCOUNT_SETTINGS -> renderMyAccount(MyAccountProps.Config(props.config.userData!!))
