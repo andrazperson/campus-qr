@@ -96,6 +96,11 @@ object Strings {
     "Sitz"
   )
 
+  val all_check_ins_error_title = LocalizedString(
+    "No check ins yet",
+    "Noch keine Check-Ins"
+  )
+
   val locations = LocalizedString(
     "Locations",
     "Orte"

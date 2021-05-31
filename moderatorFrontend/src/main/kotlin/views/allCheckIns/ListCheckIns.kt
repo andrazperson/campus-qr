@@ -2,49 +2,38 @@ package views.allCheckIns
 
 import com.studo.campusqr.common.*
 import kotlinext.js.js
-import kotlinx.browser.window
-import views.locations.AddLocationProps.Config
-import views.locations.renderAddLocation
 import react.*
 import util.Strings
 import util.apiBase
 import util.get
 import views.common.*
-import views.locations.locationsOverview.LocationTableRowProps
-import views.locations.locationsOverview.renderLocationTableRow
 import webcore.*
 import webcore.extensions.launch
 import webcore.materialUI.*
 
-interface ListLocationsProps : RProps {
-  var classes: ListLocationsClasses
+interface ListCheckInsProps : RProps {
+  var classes: ListCheckInsClasses
   var userData: UserData
 }
 
-interface ListLocationsState : RState {
-  var locationList: List<CheckInObj>?
-  var showAddLocationDialog: Boolean
-  var showImportLocationDialog: Boolean
-  var loadingLocationList: Boolean
-  var snackbarText: String
+interface ListCheckInsState : RState {
+  var checkInsList: List<CheckInObj>?
+  var loadingCheckInsList: Boolean
 }
 
-class ListLocations : RComponent<ListLocationsProps, ListLocationsState>() {
+class ListCheckIns : RComponent<ListCheckInsProps, ListCheckInsState>() {
 
-  override fun ListLocationsState.init() {
-    locationList = null
-    showAddLocationDialog = false
-    showImportLocationDialog = false
-    loadingLocationList = false
-    snackbarText = ""
+  override fun ListCheckInsState.init() {
+    checkInsList = null
+    loadingCheckInsList = false
   }
 
   private fun fetchCheckInList() = launch {
-    setState { loadingLocationList = true }
+    setState { loadingCheckInsList = true }
     val response = NetworkManager.get<Array<CheckInObj>>("$apiBase/checkIns/listCheckIns")
     setState {
-      locationList = response?.toList()
-      loadingLocationList = false
+      checkInsList = response?.toList()
+      loadingCheckInsList = false
     }
   }
 
@@ -53,9 +42,9 @@ class ListLocations : RComponent<ListLocationsProps, ListLocationsState>() {
   }
 
   override fun RBuilder.render() {
-    renderLinearProgress(state.loadingLocationList)
+    renderLinearProgress(state.loadingCheckInsList)
 
-    if (state.locationList?.isNotEmpty() == true) {
+    if (state.checkInsList?.isNotEmpty() == true) {
       mTable {
         mTableHead {
           mTableRow {
@@ -67,7 +56,7 @@ class ListLocations : RComponent<ListLocationsProps, ListLocationsState>() {
           }
         }
         mTableBody {
-          state.locationList!!.forEach { checkIn ->
+          state.checkInsList!!.forEach { checkIn ->
             renderCheckInTableRow(
               CheckInTableRowProps.Config(
                 checkIn,
@@ -77,25 +66,25 @@ class ListLocations : RComponent<ListLocationsProps, ListLocationsState>() {
           }
         }
       }
-    } else if (state.locationList == null && !state.loadingLocationList) {
+    } else if (state.checkInsList == null && !state.loadingCheckInsList) {
       networkErrorView()
-    } else if (!state.loadingLocationList) {
+    } else if (!state.loadingCheckInsList) {
       genericErrorView(
-        Strings.location_no_locations_title.get(),
-        Strings.location_no_locations_subtitle.get()
+        Strings.all_check_ins_error_title.get(),
+        ""
       )
     }
   }
 }
 
-interface ListLocationsClasses
+interface ListCheckInsClasses
 
 private val style = { _: dynamic ->
   js {
   }
 }
 
-private val styled = withStyles<ListLocationsProps, ListLocations>(style)
+private val styled = withStyles<ListCheckInsProps, ListCheckIns>(style)
 
 fun RBuilder.renderAllCheckIns(userData: UserData) = styled {
   // Set component attrs here
