@@ -13,6 +13,7 @@ import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.http.*
 import java.util.*
+import java.text.SimpleDateFormat
 
 /**
  * This file contains every endpoint which is used in the location management.
@@ -33,6 +34,8 @@ suspend fun AuthenticatedApplicationCall.listCheckIns() {
 
   val locationMap = checkIns.getLocationMap()
 
+  val dateFormat = SimpleDateFormat("dd.MM.yyyy HH:mm:ss")
+
   respondObject(
     checkIns.map { checkIn ->
       CheckInObj(
@@ -40,8 +43,8 @@ suspend fun AuthenticatedApplicationCall.listCheckIns() {
         locationId = checkIn.locationId,
         locationName = locationMap.getValue(checkIn.locationId).name,
         seat = checkIn.seat,
-        checkInDate = checkIn.date.time.toDouble(),
-        checkOutDate = checkIn.checkOutDate?.time?.toDouble(),
+        checkInDate = dateFormat.format(checkIn.date.time.toDouble()),
+        checkOutDate = dateFormat.format(checkIn.checkOutDate?.time?.toDouble()),
         email = checkIn.email
       )
     }

@@ -2,6 +2,7 @@ package views.allCheckIns
 
 import com.studo.campusqr.common.*
 import kotlinext.js.js
+import kotlinx.browser.window
 import react.*
 import util.Strings
 import util.apiBase
@@ -42,6 +43,11 @@ class ListCheckIns : RComponent<ListCheckInsProps, ListCheckInsState>() {
   }
 
   override fun RBuilder.render() {
+    renderToolbarView(
+      ToolbarViewProps.Config(
+        title = Strings.all_check_ins.get(),
+      )
+    )
     renderLinearProgress(state.loadingCheckInsList)
 
     if (state.checkInsList?.isNotEmpty() == true) {
@@ -49,10 +55,10 @@ class ListCheckIns : RComponent<ListCheckInsProps, ListCheckInsState>() {
         mTableHead {
           mTableRow {
             mTableCell { +Strings.all_check_ins_location.get() }
+            mTableCell { +Strings.all_check_ins_seat.get() }
             mTableCell { +Strings.all_check_ins_in_date.get() }
             mTableCell { +Strings.all_check_ins_out_date.get() }
             mTableCell { +Strings.all_check_ins_email.get() }
-            mTableCell { +Strings.all_check_ins_seat.get() }
           }
         }
         mTableBody {

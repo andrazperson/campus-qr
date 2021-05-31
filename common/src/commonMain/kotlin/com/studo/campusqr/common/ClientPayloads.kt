@@ -161,8 +161,8 @@ class CheckInObj(
   val locationId: String,
   val locationName: String,
   val seat: Int?,
-  val checkInDate: Double,
-  val checkOutDate: Double?,
+  val checkInDate: String,
+  val checkOutDate: String?,
   val email: String,
 ) : ClientPayload
 

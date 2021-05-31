@@ -1,19 +1,8 @@
 package views.allCheckIns
 
-import app.baseUrl
-import app.routeContext
 import com.studo.campusqr.common.*
-import kotlinx.browser.window
 import react.*
-import util.*
-import views.locations.AddLocationProps
-import views.locations.renderAddLocation
-import webcore.MenuItem
-import webcore.NetworkManager
-import webcore.extensions.launch
-import webcore.materialMenu
 import webcore.materialUI.*
-import webcore.mbMaterialDialog
 
 interface CheckInTableRowProps : RProps {
   class Config(
@@ -43,6 +32,9 @@ class CheckInTableRow : RComponent<CheckInTableRowProps, CheckInTableRowState>()
         +props.config.checkIn.locationName
       }
       mTableCell {
+        +props.config.checkIn.seat.toString()
+      }
+      mTableCell {
         +props.config.checkIn.checkInDate.toString()
       }
       mTableCell {
@@ -50,9 +42,6 @@ class CheckInTableRow : RComponent<CheckInTableRowProps, CheckInTableRowState>()
       }
       mTableCell {
         +props.config.checkIn.email
-      }
-      mTableCell {
-        +props.config.checkIn.seat.toString()
       }
     }
   }
